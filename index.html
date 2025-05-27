@@ -4,111 +4,130 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>MyQR Generator</title>
-  <style>
-    body { font-family: Arial; padding: 20px; background: #f9f9f9; }
-    .container { max-width: 500px; margin: auto; background: #fff; padding: 20px; border-radius: 10px; }
-    label, select, input, textarea, button { display: block; width: 100%; margin-bottom: 15px; }
-    #output { text-align: center; margin-top: 20px; }
-    canvas, svg { margin: auto; }
-  </style>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-<style>
-  * {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-body {
-  font-family: 'Poppins', sans-serif;
-  background: linear-gradient(135deg, #667eea, #764ba2);
-  color: #333;
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 30px;
-}
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: #333;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 30px;
+    }
 
-.container {
-  background: #fff;
-  border-radius: 12px;
-  padding: 30px;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-  width: 100%;
-  max-width: 500px;
-  animation: fadeIn 0.8s ease-in-out;
-  <div class="logo">
-  <span class="typed">MyQR Generator</span>
-</div>
-}
+    .container {
+      background: #fff;
+      border-radius: 12px;
+      padding: 30px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+      width: 100%;
+      max-width: 500px;
+      animation: fadeIn 0.8s ease-in-out;
+    }
 
-h2 {
-  text-align: center;
-  margin-bottom: 25px;
-  color: #4b0082;
-}
+    .logo {
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: #4b0082;
+      text-align: center;
+      margin-bottom: 25px;
+      white-space: nowrap;
+      overflow: hidden;
+      border-right: 2px solid #4b0082;
+      width: 0;
+      animation: typing 2s steps(20, end) forwards, blink 0.75s step-end infinite;
+    }
 
-label {
-  margin-bottom: 8px;
-  font-weight: 600;
-  display: block;
-}
+    @keyframes typing {
+      from { width: 0; }
+      to { width: 100%; }
+    }
 
-select, input, textarea, button {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 20px;
-  border-radius: 6px;
-  border: 1px solid #ccc;
-  font-size: 1em;
-}
+    @keyframes blink {
+      50% { border-color: transparent; }
+    }
 
-textarea {
-  resize: vertical;
-  min-height: 60px;
-}
+    h2 {
+      text-align: center;
+      margin-bottom: 25px;
+      color: #4b0082;
+    }
 
-button {
-  background: #4b0082;
-  color: white;
-  border: none;
-  cursor: pointer;
-  font-weight: 600;
-  transition: background 0.3s ease;
-}
+    label {
+      margin-bottom: 8px;
+      font-weight: 600;
+      display: block;
+    }
 
-button:hover {
-  background: #5f2b91;
-}
+    select, input, textarea, button {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 20px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 1em;
+    }
 
-#output {
-  text-align: center;
-  margin-top: 20px;
-}
+    textarea {
+      resize: vertical;
+      min-height: 60px;
+    }
 
-canvas, svg {
-  margin-top: 15px;
-}
+    button {
+      background: #4b0082;
+      color: white;
+      border: none;
+      cursor: pointer;
+      font-weight: 600;
+      transition: background 0.3s ease, transform 0.2s;
+    }
 
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-</style>
+    button:hover {
+      background: #5f2b91;
+      transform: scale(1.03);
+      box-shadow: 0 5px 15px rgba(91, 27, 132, 0.3);
+    }
+
+    #output {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    canvas, svg {
+      margin-top: 15px;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
 </head>
 <body>
   <div class="container">
-    <h2>MyQR Generator</h2>
+    <div class="logo">MyQR Generator</div>
 
     <label for="dataType">Select Data Type:</label>
-    <select id="dataType">
+    <select id="dataType" onchange="toggleInput()">
       <option value="text">Text / URL</option>
       <option value="file">Upload File</option>
     </select>
 
-    <textarea id="dataInput" rows="3" placeholder="Enter your text, link, or file URL..."></textarea>
-    <input type="file" id="fileInput" accept="image/*,audio/*,video/*" />
+    <div id="textInputContainer">
+      <textarea id="dataInput" rows="3" placeholder="Enter your text, link, or file URL..."></textarea>
+    </div>
+
+    <div id="fileInputContainer" style="display: none;">
+      <input type="file" id="fileInput" accept="image/*,audio/*,video/*" />
+    </div>
 
     <label for="codeType">Code Type:</label>
     <select id="codeType">
@@ -117,16 +136,32 @@ canvas, svg {
     </select>
 
     <button onclick="generateCode()">
-  <span style="margin-right: 8px;">⚡</span>Generate Code
+      <span style="margin-right: 8px;">⚡</span>Generate Code
     </button>
 
     <div id="output"></div>
   </div>
 
+  <!-- Libraries -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.5/dist/JsBarcode.all.min.js"></script>
+
   <script>
-    document.getElementById("fileInput").addEventListener("change", async function() {
+    function toggleInput() {
+      const type = document.getElementById("dataType").value;
+      const textInput = document.getElementById("textInputContainer");
+      const fileInput = document.getElementById("fileInputContainer");
+
+      if (type === "file") {
+        textInput.style.display = "none";
+        fileInput.style.display = "block";
+      } else {
+        textInput.style.display = "block";
+        fileInput.style.display = "none";
+      }
+    }
+
+    document.getElementById("fileInput").addEventListener("change", async function () {
       const file = this.files[0];
       if (!file) return;
 
@@ -137,6 +172,7 @@ canvas, svg {
         method: "POST",
         body: formData
       });
+
       const data = await res.json();
       document.getElementById("dataInput").value = data.url;
     });
