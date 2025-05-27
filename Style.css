@@ -1,9 +1,37 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: #333;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 30px;
+}
+
+.container {
+  background: #fff;
+  border-radius: 12px;
+  padding: 30px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+  width: 100%;
+  max-width: 500px;
+  animation: fadeIn 0.8s ease-in-out;
+}
+
+/* Logo with typing animation */
 .logo {
   font-size: 1.8rem;
   font-weight: bold;
   color: #4b0082;
   text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: 25px;
   white-space: nowrap;
   overflow: hidden;
   border-right: 2px solid #4b0082;
@@ -19,8 +47,64 @@
 @keyframes blink {
   50% { border-color: transparent; }
 }
+
+h2 {
+  text-align: center;
+  margin-bottom: 25px;
+  color: #4b0082;
+}
+
+label {
+  margin-bottom: 8px;
+  font-weight: 600;
+  display: block;
+}
+
+select, input, textarea, button {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 1em;
+}
+
+textarea {
+  resize: vertical;
+  min-height: 60px;
+}
+
+input[type="file"] {
+  padding: 8px;
+  background: #f9f9f9;
+  cursor: pointer;
+}
+
+button {
+  background: #4b0082;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 0.3s ease, transform 0.2s;
+}
+
 button:hover {
   background: #5f2b91;
   transform: scale(1.03);
   box-shadow: 0 5px 15px rgba(91, 27, 132, 0.3);
 }
+
+#output {
+  text-align: center;
+  margin-top: 20px;
+}
+
+canvas, svg {
+  margin-top: 15px;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+  }
